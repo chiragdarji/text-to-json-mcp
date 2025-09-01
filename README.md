@@ -43,7 +43,7 @@ npx text-to-json-mcp --help
 
 ```bash
 # Convert text to structured JSON
-npx text-to-json-mcp convert "Generate a product catalog for corrugated boxes with pricing and specs"
+npx text-to-json-mcp convert "Create a user authentication system with login and registration"
 
 # Find clarity gaps in text
 npx text-to-json-mcp gaps "Make something good"
@@ -60,14 +60,14 @@ npx text-to-json-mcp help
 
 ### Example Output
 
-**Input**: `"Generate a product catalog for corrugated boxes with pricing and specs"`
+**Input**: `"Create a user authentication system with login and registration"`
 
 **Output**:
 ```json
 {
   "success": true,
   "data": {
-    "task": "Generate a product catalog for corrugated boxes with pricing and specs",
+    "task": "Create a user authentication system with login and registration",
     "intent": "To fulfill the specified requirements and deliver the requested output",
     "inputs": {
       "required": [
@@ -92,9 +92,9 @@ npx text-to-json-mcp help
       "format": "JSON"
     },
     "clarity_gaps": [
-      "Missing specific product categories or types",
-      "Unclear pricing structure requirements",
-      "Missing technical specifications details"
+      "Missing specific authentication methods (JWT, OAuth, etc.)",
+      "Unclear user data requirements and validation",
+      "Missing security requirements and password policies"
     ]
   },
   "processing_time_ms": 15
@@ -131,7 +131,7 @@ npx text-to-json-mcp help
 
 4. **Use in Cursor**:
    ```
-   /mcp text-to-json-mcp convertPromptToJson "Generate a product catalog for corrugated boxes with pricing and specs"
+   /mcp text-to-json-mcp convertPromptToJson "Create a user authentication system with login and registration"
    ```
 
 ### VSCode Setup
