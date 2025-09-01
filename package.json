@@ -1,0 +1,59 @@
+{
+  "name": "text-to-json-mcp",
+  "version": "1.0.0",
+  "description": "A local MCP server that converts text prompts to structured JSON using Zod schemas",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "text-to-json-mcp": "./cli.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "node --test src/**/*.test.js",
+    "lint": "eslint src/",
+    "format": "prettier --write src/",
+    "prepublishOnly": "npm test"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "text-to-json",
+    "prompt-processing",
+    "ai",
+    "llm",
+    "cursor",
+    "vscode",
+    "zod",
+    "schema-validation"
+  ],
+  "author": "Chirag Darji",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chiragdarji/text-to-json-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chiragdarji/text-to-json-mcp/issues"
+  },
+  "homepage": "https://github.com/chiragdarji/text-to-json-mcp#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.5.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "eslint": "^8.56.0",
+    "prettier": "^3.1.1"
+  },
+  "files": [
+    "src/",
+    "utils/",
+    "cli.js",
+    "README.md",
+    "LICENSE"
+  ]
+}

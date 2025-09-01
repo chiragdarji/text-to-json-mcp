@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "text-to-json-mcp": {
+      "command": "npx",
+      "args": ["text-to-json-mcp", "server"],
+      "env": {}
+    }
+  }
+}
