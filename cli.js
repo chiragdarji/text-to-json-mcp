@@ -92,19 +92,28 @@ function processText(text, command) {
   }
 }
 
-function startServer() {
+async function startServer() {
   console.log('Starting MCP server...');
   console.log('This server is designed to run as a background process for IDE integration.');
   console.log('Use Ctrl+C to stop the server.');
   
-  // Import and start the MCP server
-  import('./src/index.js').catch((error) => {
+  try {
+    // Import and start the MCP server
+    const { fileURLToPath } = await import('url');
+    const { dirname, join } = await import('path');
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = dirname(__filename);
+    const serverPath = join(__dirname, 'src', 'index.js');
+    
+    console.log(`Loading MCP server from: ${serverPath}`);
+    await import(serverPath);
+  } catch (error) {
     console.error('Failed to start MCP server:', error);
     process.exit(1);
-  });
+  }
 }
 
-function main() {
+async function main() {
   const args = process.argv.slice(2);
   
   if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
@@ -127,7 +136,7 @@ function main() {
       showVersion();
       break;
     case 'server':
-      startServer();
+      await startServer();
       break;
     case 'convert':
     case 'gaps':

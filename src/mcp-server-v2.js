@@ -1,42 +1,9 @@
 #!/usr/bin/env node
 
-/**
- * Text-to-JSON MCP Server
- * A local MCP server that converts text prompts to structured JSON using Zod schemas
- */
-
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { z } from 'zod';
 import { convertPromptToJson, refinePrompt } from '../utils/promptProcessor.js';
 import { analyzeTextForGaps } from '../utils/gapAnalysis.js';
-
-// Define request schemas
-const ConvertPromptRequestSchema = z.object({
-  method: z.literal('convertPromptToJson'),
-  params: z.object({
-    text: z.string()
-  })
-});
-
-const FindClarityGapsRequestSchema = z.object({
-  method: z.literal('findClarityGaps'),
-  params: z.object({
-    text: z.string()
-  })
-});
-
-const RefinePromptRequestSchema = z.object({
-  method: z.literal('refinePrompt'),
-  params: z.object({
-    text: z.string()
-  })
-});
-
-const HealthRequestSchema = z.object({
-  method: z.literal('health'),
-  params: z.object({}).optional()
-});
 
 // Create MCP server instance
 const server = new Server(
@@ -52,9 +19,13 @@ const server = new Server(
 );
 
 // Method 1: Convert prompt to structured JSON
-server.setRequestHandler(ConvertPromptRequestSchema, async (request) => {
+server.setRequestHandler('convertPromptToJson', async (request) => {
   try {
     const { text } = request.params;
+    if (!text) {
+      return { success: false, error: "Text parameter is required" };
+    }
+    
     const result = convertPromptToJson(text);
     return result;
     
@@ -65,9 +36,13 @@ server.setRequestHandler(ConvertPromptRequestSchema, async (request) => {
 });
 
 // Method 2: Find clarity gaps in prompt
-server.setRequestHandler(FindClarityGapsRequestSchema, async (request) => {
+server.setRequestHandler('findClarityGaps', async (request) => {
   try {
     const { text } = request.params;
+    if (!text) {
+      return { success: false, error: "Text parameter is required" };
+    }
+    
     const gapAnalysis = analyzeTextForGaps(text);
     return {
       success: true,
@@ -82,9 +57,13 @@ server.setRequestHandler(FindClarityGapsRequestSchema, async (request) => {
 });
 
 // Method 3: Refine prompt for better clarity
-server.setRequestHandler(RefinePromptRequestSchema, async (request) => {
+server.setRequestHandler('refinePrompt', async (request) => {
   try {
     const { text } = request.params;
+    if (!text) {
+      return { success: false, error: "Text parameter is required" };
+    }
+    
     const result = refinePrompt(text);
     return result;
     
@@ -95,12 +74,17 @@ server.setRequestHandler(RefinePromptRequestSchema, async (request) => {
 });
 
 // Health check method
-server.setRequestHandler(HealthRequestSchema, async () => {
+server.setRequestHandler('health', async () => {
   return {
     status: 'healthy',
     timestamp: new Date().toISOString(),
     version: '1.0.0'
   };
+});
+
+// Error handling
+server.onError((error) => {
+  console.error('MCP Server Error:', error);
 });
 
 // Start the server
