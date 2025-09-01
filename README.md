@@ -242,6 +242,291 @@ npm version major   # 1.0.0 → 2.0.0 (breaking changes)
 - **Documentation**: Generate consistent documentation templates from text descriptions
 - **Quality Assurance**: Identify unclear or incomplete specifications
 - **Team Collaboration**: Standardize communication formats across development teams
+- **Real-time Development**: Structure requirements and tasks during active coding sessions
+
+## Real-Time Software Development Examples
+
+### Example 1: Feature Development During Active Coding
+
+**Scenario**: You're in the middle of building a user authentication system when your team lead asks you to add a new feature.
+
+**Raw Request**: *"We need to add password reset functionality to the auth system. Users should be able to request a reset link via email and set a new password. Make sure it's secure and follows our existing patterns."*
+
+**Using text-to-json-mcp in Cursor**:
+```
+/mcp text-to-json-mcp convertPromptToJson "We need to add password reset functionality to the auth system. Users should be able to request a reset link via email and set a new password. Make sure it's secure and follows our existing patterns."
+```
+
+**Structured Output**:
+```json
+{
+  "success": true,
+  "data": {
+    "task": "Add password reset functionality to the auth system",
+    "intent": "To fulfill the specified requirements and deliver the requested output",
+    "inputs": {
+      "required": [
+        "Input text or prompt",
+        "Context or background information"
+      ],
+      "optional": [
+        "Additional context",
+        "Preferences or style guidelines"
+      ],
+      "constraints": [
+        "Available time and resources",
+        "Technical limitations"
+      ]
+    },
+    "outputs": {
+      "primary": "System",
+      "secondary": [
+        "Documentation or instructions",
+        "Quality assurance metrics"
+      ],
+      "format": "JSON"
+    },
+    "clarity_gaps": [
+      "Missing specific security requirements (token expiration, rate limiting)",
+      "Unclear email template requirements",
+      "Missing integration points with existing auth flow"
+    ]
+  },
+  "processing_time_ms": 12
+}
+```
+
+**Next Step - Find Clarity Gaps**:
+```
+/mcp text-to-json-mcp findClarityGaps "We need to add password reset functionality to the auth system. Users should be able to request a reset link via email and set a new password. Make sure it's secure and follows our existing patterns."
+```
+
+**Gap Analysis Output**:
+```json
+{
+  "success": true,
+  "gaps": [
+    {
+      "category": "missing_constraints",
+      "description": "Missing constraint: \"secure\"",
+      "suggestion": "Specify limits, boundaries, or specific criteria for \"secure\"",
+      "severity": "high"
+    },
+    {
+      "category": "unclear_output",
+      "description": "Unclear output: \"system\"",
+      "suggestion": "Specify the exact format, structure, and content of the \"system\"",
+      "severity": "medium"
+    }
+  ],
+  "overall_clarity_score": 70
+}
+```
+
+**Final Step - Refine the Request**:
+```
+/mcp text-to-json-mcp refinePrompt "We need to add password reset functionality to the auth system. Users should be able to request a reset link via email and set a new password. Make sure it's secure and follows our existing patterns."
+```
+
+**Refined Output**:
+```json
+{
+  "success": true,
+  "original_prompt": "We need to add password reset functionality to the auth system...",
+  "refined_prompt": "Context: This request is for adding password reset functionality to an existing authentication system. We need to add password reset functionality to the auth system. Users should be able to request a reset link via email and set a new password. The output should be in [specific format] with [specific structure] and include [specific content]. Constraints: [specify time limits, resource constraints, technical limitations].",
+  "improvements": [
+    {
+      "type": "clarity",
+      "description": "Added context section",
+      "before": "We need to add password reset functionality...",
+      "after": "Context: This request is for adding password reset functionality to an existing authentication system. We need to add password reset functionality..."
+    },
+    {
+      "type": "structure",
+      "description": "Added specific output requirements",
+      "before": "Make sure it's secure and follows our existing patterns.",
+      "after": "The output should be in [specific format] with [specific structure] and include [specific content]."
+    },
+    {
+      "type": "completeness",
+      "description": "Added constraints section",
+      "before": "Make sure it's secure and follows our existing patterns.",
+      "after": "Constraints: [specify time limits, resource constraints, technical limitations]."
+    }
+  ]
+}
+```
+
+### Example 2: Bug Fix During Debugging Session
+
+**Scenario**: You're debugging a production issue and need to quickly structure the problem description for your team.
+
+**Raw Request**: *"The login API is returning 500 errors for some users. It seems to happen when they have special characters in their email addresses. We need to fix this ASAP because it's blocking customer access."*
+
+**Using text-to-json-mcp**:
+```
+/mcp text-to-json-mcp convertPromptToJson "The login API is returning 500 errors for some users. It seems to happen when they have special characters in their email addresses. We need to fix this ASAP because it's blocking customer access."
+```
+
+**Structured Output**:
+```json
+{
+  "success": true,
+  "data": {
+    "task": "Fix login API 500 errors for users with special characters in email addresses",
+    "intent": "To resolve production blocking issue and restore customer access",
+    "inputs": {
+      "required": [
+        "Input text or prompt",
+        "Context or background information"
+      ],
+      "optional": [
+        "Additional context",
+        "Preferences or style guidelines"
+      ],
+      "constraints": [
+        "Available time and resources",
+        "Technical limitations"
+      ]
+    },
+    "outputs": {
+      "primary": "API",
+      "secondary": [
+        "Documentation or instructions",
+        "Quality assurance metrics"
+      ],
+      "format": "JSON"
+    },
+    "clarity_gaps": [
+      "Missing specific error details and stack traces",
+      "Unclear which special characters are problematic",
+      "Missing user impact metrics and urgency level"
+    ]
+  },
+  "processing_time_ms": 8
+}
+```
+
+### Example 3: Code Review Feedback Structuring
+
+**Scenario**: You're reviewing a pull request and want to structure your feedback systematically.
+
+**Raw Request**: *"The error handling in this service layer is inconsistent. Some methods return null, others throw exceptions, and some return empty objects. We should standardize this across all methods."*
+
+**Using text-to-json-mcp**:
+```
+/mcp text-to-json-mcp convertPromptToJson "The error handling in this service layer is inconsistent. Some methods return null, others throw exceptions, and some return empty objects. We should standardize this across all methods."
+```
+
+**Structured Output**:
+```json
+{
+  "success": true,
+  "data": {
+    "task": "Standardize error handling across service layer methods",
+    "intent": "To create consistent error handling patterns for better maintainability",
+    "inputs": {
+      "required": [
+        "Input text or prompt",
+        "Context or background information"
+      ],
+      "optional": [
+        "Additional context",
+        "Preferences or style guidelines"
+      ],
+      "constraints": [
+        "Available time and resources",
+        "Technical limitations"
+      ]
+    },
+    "outputs": {
+      "primary": "Layer",
+      "secondary": [
+        "Documentation or instructions",
+        "Quality assurance metrics"
+      ],
+      "format": "JSON"
+    },
+    "clarity_gaps": [
+      "Missing specific error handling strategy (null vs exceptions vs empty objects)",
+      "Unclear scope of methods to be updated",
+      "Missing migration plan for existing code"
+    ]
+  },
+  "processing_time_ms": 10
+}
+```
+
+### Example 4: Sprint Planning and Task Breakdown
+
+**Scenario**: During sprint planning, you need to quickly structure a new feature request from stakeholders.
+
+**Raw Request**: *"We need a dashboard that shows user analytics including login frequency, feature usage, and retention metrics. It should be real-time and exportable to CSV. The design team wants it to match our new design system."*
+
+**Using text-to-json-mcp**:
+```
+/mcp text-to-json-mcp convertPromptToJson "We need a dashboard that shows user analytics including login frequency, feature usage, and retention metrics. It should be real-time and exportable to CSV. The design team wants it to match our new design system."
+```
+
+**Structured Output**:
+```json
+{
+  "success": true,
+  "data": {
+    "task": "Create user analytics dashboard with real-time data and CSV export",
+    "intent": "To provide stakeholders with comprehensive user behavior insights",
+    "inputs": {
+      "required": [
+        "Input text or prompt",
+        "Context or background information"
+      ],
+      "optional": [
+        "Additional context",
+        "Preferences or style guidelines"
+      ],
+      "constraints": [
+        "Available time and resources",
+        "Technical limitations"
+      ]
+    },
+    "outputs": {
+      "primary": "Dashboard",
+      "secondary": [
+        "Documentation or instructions",
+        "Quality assurance metrics"
+      ],
+      "format": "JSON"
+    },
+    "clarity_gaps": [
+      "Missing specific metrics calculation methods",
+      "Unclear real-time update frequency requirements",
+      "Missing design system component specifications",
+      "Missing data retention and privacy requirements"
+    ]
+  },
+  "processing_time_ms": 15
+}
+```
+
+### Benefits of Real-Time Usage
+
+1. **Immediate Structure**: Convert vague requests into actionable tasks in seconds
+2. **Gap Identification**: Spot missing requirements before starting development
+3. **Team Communication**: Provide structured feedback during code reviews
+4. **Sprint Planning**: Break down features into clear, measurable tasks
+5. **Documentation**: Generate consistent task descriptions for project management tools
+6. **Quality Assurance**: Identify unclear specifications before they become bugs
+7. **Onboarding**: Help new team members understand requirements quickly
+8. **Stakeholder Alignment**: Ensure everyone has the same understanding of requests
+
+### Integration with Development Workflow
+
+- **During Standups**: Quickly structure feature requests and bug reports
+- **Code Reviews**: Structure feedback and improvement suggestions
+- **Sprint Planning**: Break down epics into actionable stories
+- **Bug Triage**: Structure issue descriptions for better tracking
+- **API Design**: Structure endpoint requirements and specifications
+- **Testing**: Structure test case requirements and acceptance criteria
 
 ## Contributing
 
